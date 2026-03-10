@@ -11,8 +11,11 @@ def outside_list_bounds(a_list: list[Any], idx: int):
     should be written to standard out... where the values denoted by {} are
     placeholders
     """
-
-    entry = a_list[idx]
+    try:
+        entry = a_list[idx]
+        return entry
+    except IndexError:
+        print(f"{idx} does not fall in the range [0, {len(a_list)}]")
 
 
 def parse_an_int(raw_value: str) -> int | None:
@@ -20,8 +23,10 @@ def parse_an_int(raw_value: str) -> int | None:
     Parse a string into an int. If the supplied value cannot be parsed...
     return None
     """
-
-    return int(raw_value)
+    try:
+        return int(raw_value)
+    except ValueError:
+        return None
 
 
 def missing_dictionary_key(lookup_table: dict[str, Any], key: str):
@@ -33,8 +38,12 @@ def missing_dictionary_key(lookup_table: dict[str, Any], key: str):
 
     where the values denoted by {} are placeholders
     """
-
-    entry = lookup_table[key]
+    try:
+        entry = lookup_table[key]
+        return entry
+    except KeyError:
+        print(f"'{key}' does not correspond to an entry in lookup_table")
+        return None
 
 
 def divide(lhs: int | float, rhs: int | float) -> float | None:
@@ -42,4 +51,7 @@ def divide(lhs: int | float, rhs: int | float) -> float | None:
     Divide lhs by rhs. If a ZeroDivisionError occurs... return None
     """
 
-    return lhs / rhs
+    try:
+        return lhs/rhs
+    except ZeroDivisionError:
+        return None
